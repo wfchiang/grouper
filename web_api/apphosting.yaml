@@ -22,3 +22,5 @@ env:
     secret: FIREBASE_APP_ID
   - variable: FIREBASE_MEASUREMENT_ID
     secret: FIREBASE_MEASUREMENT_ID
+  - variable: FIREBASE_APP_GROUPER_DB
+    secret: FIREBASE_APP_GROUPER_DB
