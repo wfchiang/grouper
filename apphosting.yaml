@@ -8,11 +8,6 @@ runConfig:
 
 # Environment variables and secrets
 env:
-  - variable: MY_NAME
-    value: TEST
-    availability:
-      - BUILD
-      - RUNTIME
   - variable: FIREBASE_API_KEY
     secret: FIREBASE_API_KEY
     availability:

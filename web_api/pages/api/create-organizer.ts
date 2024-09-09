@@ -15,7 +15,7 @@ export default async function handler(req :NextApiRequest, res :NextApiResponse)
   const querySnapshot = await getDocs(collection(db, "grouper-organizer"));
   const organizers = querySnapshot.docs.map(doc => doc.data());
 
-  res.status(200).json({ message: `Got email ${email} of ${name} of project ${process.env.MY_NAME} -- ${JSON.stringify(organizers)}` });
+  res.status(200).json({ message: `Got email ${email} of ${name} of project ${process.env.FIREBASE_PROJECT_ID} -- ${JSON.stringify(organizers)}` });
 }
 
 
