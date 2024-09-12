@@ -1,6 +1,7 @@
 // firebase.ts
 import { v4 as uuidv4 } from 'uuid';
 import { initializeApp } from "firebase/app";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"; 
 import { Timestamp, collection, query, getCountFromServer, where, getFirestore, getDocs, addDoc } from "firebase/firestore";
 
 /* 
@@ -24,7 +25,22 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app); 
+export const googleAuthProvider = new GoogleAuthProvider();
 export const db = getFirestore(app);
+
+/* 
+Authentication(s) 
+*/
+export const signInWithGoogle = async () => {
+  try {
+    const result = await signInWithPopup(auth, googleAuthProvider);
+    const user = result.user;
+    console.log('User Info:', user);
+  } catch (error) {
+    console.error('Error during sign-in:', error);
+  }
+};
 
 /* 
 Data interfaces
