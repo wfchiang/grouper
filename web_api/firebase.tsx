@@ -1,7 +1,6 @@
 // firebase.ts
 import { v4 as uuidv4 } from 'uuid';
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"; 
 import { Timestamp, collection, query, getCountFromServer, where, getFirestore, getDocs, addDoc } from "firebase/firestore";
 
 /* 
@@ -15,40 +14,25 @@ export const COLLECTION_PARTICIPANT = "grouper-participant";
 Establish Firestore connection 
 */ 
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.FIREBASE_PROJECT_ID,
-  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.FIREBASE_APP_ID, 
-  databaseURL: process.env.FIREBASE_GROUPER_DB_URL, 
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID, 
 };
 
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app); 
-export const googleAuthProvider = new GoogleAuthProvider();
-export const db = getFirestore(app);
-
-/* 
-Authentication(s) 
-*/
-export const signInWithGoogle = async () => {
-  try {
-    const result = await signInWithPopup(auth, googleAuthProvider);
-    const user = result.user;
-    console.log('User Info:', user);
-  } catch (error) {
-    console.error('Error during sign-in:', error);
-  }
-};
+export const app = initializeApp(firebaseConfig);
+let db = getFirestore(app);
 
 /* 
 Data interfaces
 */ 
 export interface Organizer {
   id? :string; 
-  name :string; 
-  email :string;
+  name? :string; 
+  email? :string;
+  photoURL? :string; 
   createdAt? :Timestamp;  
 }
 
@@ -74,6 +58,12 @@ Assertion functions
 export function assertValidGrouping (grouping :Grouping) {
   if (grouping.numGroups <= 0) {
     throw new Error(`Invalid numGroups: ${grouping.numGroups}`); 
+  }
+}
+
+export function assertValidOrganizer (organizer :Organizer) {
+  if (typeof(organizer.email) !== "string" || organizer.email!.trim() === "") {
+    throw new Error("Organizer's email missed"); 
   }
 }
 
@@ -156,7 +146,7 @@ export async function addOrganizer (organizer :Organizer) {
   }
   organizer.createdAt = Timestamp.now(); 
 
-  const existingOrganizer = await getOrganizer(organizer.email); 
+  const existingOrganizer = await getOrganizer(organizer.email!); 
   if (existingOrganizer === undefined) {
     await addDoc(
       collection(db, COLLECTION_ORGANIZER), 
