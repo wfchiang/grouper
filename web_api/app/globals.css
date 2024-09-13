@@ -25,3 +25,46 @@ body {
     text-wrap: balance;
   }
 }
+
+/* AuthPanel */
+.auth-panel {
+  margin :3em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth-panel > * {
+  margin: 1em;
+}
+
+.auth-panel > h2 {
+  font-size: larger;
+}
+
+/* UserProfilePanel */ 
+.user-profile-panel {
+  margin: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.user-profile-panel > * {
+  margin: 5px;
+}
+
+/* GroupingList */
+.grouping-list > .grouping-display-box {
+  margin: 1em; 
+}
+
+/* GroupingDisplayBox */
+.grouping-display-box {
+  border-color: gray;
+  border-width: 3px;
+}
+
+.grouping-display-box > * {
+  margin: 1em;
+}

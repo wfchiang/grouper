@@ -1,5 +1,7 @@
-import { Organizer, Grouping, getGroupingsByOrganizerEmail } from '@/firebase';
 import { useState } from 'react';
+import { Organizer, Grouping, getGroupingsByOrganizerEmail } from '@/firebase';
+import { GroupingDisplayBox } from './GroupingDisplayBox';
+import "../app/globals.css"
 
 interface GroupingListProps {
     organizer :Organizer; 
@@ -16,18 +18,12 @@ export const GroupingList :React.FC<GroupingListProps> = ({organizer} :GroupingL
 
     // Render the list of Groupings
     return (
-        <div>
+        <div className="grouping-list">
             {
                 groupings.map((grouping, groupingIdx) => {
-                    return (<div>{grouping.id}</div>); 
+                    return (<GroupingDisplayBox grouping={grouping}></GroupingDisplayBox>); 
                 })
             }
-            {/* <h2>Sign in to create your grouping</h2>
-            {
-                organizer.email === undefined
-                ? <GoogleSignInButton setOrganizer={setOrganizer}/>
-                : <UserProfilePanel organizer={organizer}></UserProfilePanel>
-            } */}
         </div>
     ); 
 }; 

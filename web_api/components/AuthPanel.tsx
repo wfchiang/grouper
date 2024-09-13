@@ -3,6 +3,7 @@
 import { Organizer } from '@/firebase';
 import { GoogleSignInButton } from './GoogleSignInButton';
 import { UserProfilePanel } from './UserProfilePanel';
+import "../app/globals.css"
 
 interface AuthPanelProps {
     organizer :Organizer; 
@@ -13,7 +14,7 @@ export const AuthPanel :React.FC<AuthPanelProps> = ({organizer, setOrganizer} :A
     console.log(`AuthPanel: ${JSON.stringify(organizer)}`); 
 
     return (
-        <div>
+        <div className="auth-panel">
             <h2>Sign in to create your grouping</h2>
             {
                 organizer.email === undefined
