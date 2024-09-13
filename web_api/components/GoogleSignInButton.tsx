@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from "next/image"
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"; 
-import {  Organizer, app as firebaseApp } from '../firebase';
+import {  Organizer, app as firebaseApp, getOrganizer } from '../firebase';
 
 interface GoogleSignInButtonProps {
     setOrganizer :(organizer :Organizer) => void; 
@@ -21,11 +21,15 @@ export const GoogleSignInButton :React.FC<GoogleSignInButtonProps> = ({setOrgani
             const user = result.user;
             // console.log('User Info:', JSON.stringify(user));
 
-            setOrganizer({
-                name: (user.displayName == null ? undefined : user.displayName), 
-                email: (user.email == null ? undefined : user.email), 
-                photoURL: (user.photoURL == null ? undefined : user.photoURL) 
-            }); 
+            const organizer = await getOrganizer(user.email!); 
+            if (organizer !== undefined) {
+                setOrganizer({
+                    name: (user.displayName == null ? undefined : user.displayName), 
+                    email: (user.email == null ? undefined : user.email), 
+                    photoURL: (user.photoURL == null ? undefined : user.photoURL) 
+                }); 
+            }
+            
         } catch (error) {
             console.error('Error during sign-in:', error);
         }
