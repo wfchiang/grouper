@@ -10,6 +10,9 @@ export const COLLECTION_ORGANIZER = "grouper-organizer";
 export const COLLECTION_GROUPING = "grouper-grouping"; 
 export const COLLECTION_PARTICIPANT = "grouper-participant"; 
 
+export const MAX_GROUPING_SIZE = 1000; 
+export const MAX_GROUPINGS_PER_ORGANIZER = 3; 
+
 /* 
 Establish Firestore connection 
 */ 
@@ -28,12 +31,17 @@ let db = getFirestore(app);
 /* 
 Data interfaces
 */ 
-export interface Organizer {
+export interface Person {
   id? :string; 
   name? :string; 
   email? :string;
   photoURL? :string; 
-  createdAt? :Timestamp;  
+} 
+
+export interface Organizer extends Person {
+  createdAt? :Timestamp; 
+  ownedGroupings? :number;
+  maxOwnedGroupings? :number; 
 }
 
 export interface Grouping {
@@ -42,12 +50,12 @@ export interface Grouping {
   description :string; 
   organizerEmail :string; 
   numGroups :number; 
-  createdAt? :Timestamp;  
+  createdAt? :Timestamp; 
+  maxSize? :number; 
 }
 
-export interface Participant {
-  email :string; 
-  groupingId :string; 
+export interface Participant extends Person {
+  groupingId? :string; 
   assignedGroupId? :number; 
   createdAt? :Timestamp;  
 }
@@ -135,6 +143,16 @@ export async function getParticipant (participant :Participant) :Promise<Partici
   else {
     return participants[0]; 
   }
+}
+
+export async function getParticipantByGroupingId (groupingId :string) :Promise<Participant[]> {
+  const querySnapshot = await getDocs(query(
+    collection(db, COLLECTION_PARTICIPANT), 
+    where("groupingId", "==", groupingId), 
+  ));
+  const participants = querySnapshot.docs.map(doc => (doc.data() as Participant)); 
+
+  return participants; 
 }
 
 /* 

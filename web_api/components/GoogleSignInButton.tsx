@@ -3,13 +3,14 @@
 import React from 'react';
 import Image from "next/image"
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"; 
-import {  Organizer, app as firebaseApp, getOrganizer } from '../firebase';
+import { Person, Organizer, app as firebaseApp, getOrganizer } from '../firebase';
 
 interface GoogleSignInButtonProps {
-    setOrganizer :(organizer :Organizer) => void; 
+    setPerson :(person: Person) => void; 
+    validateAgaintOrganizer :boolean;
 }
 
-export const GoogleSignInButton :React.FC<GoogleSignInButtonProps> = ({setOrganizer} :GoogleSignInButtonProps) => {
+export const GoogleSignInButton :React.FC<GoogleSignInButtonProps> = ({setPerson, validateAgaintOrganizer} :GoogleSignInButtonProps) => {
     const signInWithGoogle = async () => {
         try {
             // Acquire the user credential and save it 
@@ -21,9 +22,13 @@ export const GoogleSignInButton :React.FC<GoogleSignInButtonProps> = ({setOrgani
             const user = result.user;
             // console.log('User Info:', JSON.stringify(user));
 
-            const organizer = await getOrganizer(user.email!); 
-            if (organizer !== undefined) {
-                setOrganizer({
+            const organizer = (
+                validateAgaintOrganizer
+                ? await getOrganizer(user.email!)
+                : undefined
+            ); 
+            if (!validateAgaintOrganizer || organizer !== undefined) {
+                setPerson({
                     name: (user.displayName == null ? undefined : user.displayName), 
                     email: (user.email == null ? undefined : user.email), 
                     photoURL: (user.photoURL == null ? undefined : user.photoURL) 

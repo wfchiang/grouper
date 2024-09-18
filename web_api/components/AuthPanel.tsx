@@ -18,7 +18,7 @@ export const AuthPanel :React.FC<AuthPanelProps> = ({organizer, setOrganizer} :A
             <h2>Sign in to create your grouping</h2>
             {
                 organizer.email === undefined
-                ? <GoogleSignInButton setOrganizer={setOrganizer}/>
+                ? <GoogleSignInButton setPerson={setOrganizer} validateAgaintOrganizer={true}/>
                 : <UserProfilePanel organizer={organizer}></UserProfilePanel>
             }
         </div>
