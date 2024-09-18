@@ -1,40 +1,37 @@
-import { useRouter } from 'next/router';
-import { GetServerSideProps } from 'next';
+'use client'; 
+
+import { useEffect, useState } from 'react';
 import { useQRCode } from 'next-qrcode';
 import "../app/globals.css"
 
-interface CallForParticipantsPageProps {
-    protocol: string;
-    host: string;
-}
+export default function CallForParticipantsPage () {
+    const [participatingUrl, setParticipatingUrl] = useState<string>(''); 
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { req } = context;
-  const protocol = req.headers['x-forwarded-proto'] || 'http';
-  const host = req.headers['host'] || 'localhost';
-
-  return {
-    props: {
-      protocol,
-      host
-    },
-  };
-};
-
-export default function CallForParticipantsPage ({protocol, host} :CallForParticipantsPageProps) {
-    const router = useRouter(); 
-    const { query } = router; 
-    const groupingId = query.groupingId! as string; 
-    
-    const participatingUrl = `${protocol}://${host}/participate/${groupingId}`;
+    useEffect(() => {
+      if (typeof window !== "undefined") {
+        const protocol = window.location.protocol!; 
+        const host = window.location.host!; 
+        const params = new URLSearchParams(window.location.search!);
+        const groupingId = params.get("groupingId"); 
+        setParticipatingUrl(`${protocol}://${host}/participate/${groupingId}`); 
+      }
+    }, []); 
     
     const { Canvas } = useQRCode(); 
 
     return (
         <div>
-            <Canvas
-              text={participatingUrl}
-            />
+            {
+              participatingUrl === ""
+              ? <p>QR code generating...</p>
+              : <div>
+                <p>{`Participating URL: ${participatingUrl}`}</p>
+                <Canvas
+                  text={participatingUrl}
+                />
+              </div>
+            }
+            
         </div>
     ); 
 }
