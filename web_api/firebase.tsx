@@ -194,7 +194,7 @@ export async function addParticipant (participant :Participant) {
   const existingParticipant = await getParticipant(participant); 
   if (existingParticipant === undefined) {
     // Check the grouping exists
-    const grouping = (await getGroupingById(participant.groupingId))!;
+    const grouping = (await getGroupingById(participant.groupingId!))!;
     assertValidGrouping(grouping); 
 
     // Set the timestamp 
