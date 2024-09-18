@@ -10,8 +10,8 @@ interface GroupingDisplayBoxProps {
 export const GroupingDisplayBox :React.FC<GroupingDisplayBoxProps> = ({grouping} :GroupingDisplayBoxProps) => {
     let [participantAssignment, setParticipantAssignment] = useState<{[key :number]: number}>({}); 
 
-    let httpProtocol = window.location.protocol!; 
-    let httpHost = window.location.host!; 
+    // let httpProtocol = window.location.protocol!; 
+    // let httpHost = window.location.host!; 
 
     // get the participant assignment
     getParticipantByGroupingId(grouping.id!)
@@ -58,10 +58,7 @@ export const GroupingDisplayBox :React.FC<GroupingDisplayBoxProps> = ({grouping}
                 }
             </div>
             {/* call for participants */}
-            <p>{`${httpProtocol}`}</p>
-            <p>{`${httpHost}`}</p>
             <a href={`/call-for-participants?groupingId=${grouping.id}`}>Call for Participants</a>
-            {/* <CallForParticipants groupingId={grouping.id!}></CallForParticipants> */}
         </div>
     );
 }; 

@@ -24,9 +24,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 export default function CallForParticipantsPage ({protocol, host} :CallForParticipantsPageProps) {
     const router = useRouter(); 
     const { query } = router; 
-    let groupingId = query.groupingId! as string; 
+    const groupingId = query.groupingId! as string; 
     
-    let participatingUrl = `${protocol}://${host}/participate/${groupingId}`;
+    const participatingUrl = `${protocol}://${host}/participate/${groupingId}`;
     
     const { Canvas } = useQRCode(); 
 
