@@ -8,7 +8,7 @@ import { Participant } from '@/firebase';
 export default function ParticipateGroupingPage () {
     const router = useRouter(); 
     const { query } = router; 
-    let groupingId = query.groupingId! as string; 
+    const groupingId = query.groupingId! as string; 
 
     const [participant, setParticipant] = useState<Participant>({groupingId: groupingId} as Participant); 
 

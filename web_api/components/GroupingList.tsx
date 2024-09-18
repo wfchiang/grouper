@@ -8,7 +8,7 @@ interface GroupingListProps {
 }
 
 export const GroupingList :React.FC<GroupingListProps> = ({organizer} :GroupingListProps) => {
-    let [groupings, setGroupings] = useState<Grouping[]>([]); 
+    const [groupings, setGroupings] = useState<Grouping[]>([]); 
 
     // Get the groupings 
     getGroupingsByOrganizerEmail(organizer.email!)
@@ -20,7 +20,7 @@ export const GroupingList :React.FC<GroupingListProps> = ({organizer} :GroupingL
     return (
         <div className="grouping-list">
             {
-                groupings.map((grouping, groupingIdx) => {
+                groupings.map((grouping, _) => {
                     return (<GroupingDisplayBox grouping={grouping}></GroupingDisplayBox>); 
                 })
             }

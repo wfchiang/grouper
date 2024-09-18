@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from "next/image"
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"; 
-import { Person, Organizer, app as firebaseApp, getOrganizer } from '../firebase';
+import { Person, app as firebaseApp, getOrganizer } from '../firebase';
 
 interface GoogleSignInButtonProps {
     setPerson :(person: Person) => void; 

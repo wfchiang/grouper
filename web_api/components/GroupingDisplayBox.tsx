@@ -8,7 +8,7 @@ interface GroupingDisplayBoxProps {
 }
 
 export const GroupingDisplayBox :React.FC<GroupingDisplayBoxProps> = ({grouping} :GroupingDisplayBoxProps) => {
-    let [participantAssignment, setParticipantAssignment] = useState<{[key :number]: number}>({}); 
+    const [participantAssignment, setParticipantAssignment] = useState<{[key :number]: number}>({}); 
 
     // let httpProtocol = window.location.protocol!; 
     // let httpHost = window.location.host!; 
@@ -16,12 +16,12 @@ export const GroupingDisplayBox :React.FC<GroupingDisplayBoxProps> = ({grouping}
     // get the participant assignment
     getParticipantByGroupingId(grouping.id!)
     .then((participants :Participant[]) => {
-        let newParticipantAssignment :{[key :number]: number} = {}; 
+        const newParticipantAssignment :{[key :number]: number} = {}; 
         for (let i = 0 ; i < grouping.numGroups ; i++) {
             newParticipantAssignment[i] = 0; 
         }
         for (let j = 0 ; j < participants.length ; j++) {
-            let assignGroupId :number = participants[j].assignedGroupId!; 
+            const assignGroupId :number = participants[j].assignedGroupId!; 
             newParticipantAssignment[assignGroupId] = newParticipantAssignment[assignGroupId] + 1; 
         }
         setParticipantAssignment(newParticipantAssignment); 
@@ -48,7 +48,7 @@ export const GroupingDisplayBox :React.FC<GroupingDisplayBoxProps> = ({grouping}
             <div>
                 {
                     Array.from({length: grouping.numGroups}, (_, groupId) => {
-                        let nParticipants = (
+                        const nParticipants = (
                             participantAssignment[groupId] === undefined
                             ? 0
                             : participantAssignment[groupId]
