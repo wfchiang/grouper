@@ -190,7 +190,7 @@ export async function addGrouping (grouping :Grouping) {
   } 
 }
 
-export async function addParticipant (participant :Participant) {
+export async function addParticipant (participant :Participant) :Promise<number> {
   const existingParticipant = await getParticipant(participant); 
   if (existingParticipant === undefined) {
     // Check the grouping exists
@@ -216,5 +216,11 @@ export async function addParticipant (participant :Participant) {
       collection(db, COLLECTION_PARTICIPANT), 
       participant
     );
+
+    // return 
+    return assignedGroupId; 
   } 
+  else {
+    return existingParticipant.assignedGroupId!; 
+  }
 }

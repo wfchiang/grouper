@@ -30,22 +30,24 @@ export const GroupingDisplayBox :React.FC<GroupingDisplayBoxProps> = ({grouping}
     // render 
     return (
         <div className="grouping-display-box">
-            {/* name */}
-            {
-                grouping.name === undefined
-                ? <p>(no name)</p>
-                : <p>{grouping.name}</p>
-            }
-            {/* description */}
-            {
-                grouping.description === undefined
-                ? <p></p>
-                : <p>{grouping.description}</p>
-            }
+            <div style={{display: "flex"}}>
+                {/* name */}
+                {
+                    grouping.name === undefined
+                    ? <p>(no name)</p>
+                    : <h2>{grouping.name}</h2>
+                }
+                {/* description */}
+                {
+                    grouping.description === undefined
+                    ? <p></p>
+                    : <p>{grouping.description}</p>
+                }
+            </div>
             {/* number of groups */}
-            <p>{`${grouping.numGroups} groups`}</p>
+            <h2>{`${grouping.numGroups} groups`}</h2>
             {/* participant assignment */}
-            <div>
+            <div style={{display: "flex"}}>
                 {
                     Array.from({length: grouping.numGroups}, (_, groupId) => {
                         const nParticipants = (
@@ -53,12 +55,19 @@ export const GroupingDisplayBox :React.FC<GroupingDisplayBoxProps> = ({grouping}
                             ? 0
                             : participantAssignment[groupId]
                         ); 
-                        return (<p>{`group ${groupId+1}: ${nParticipants}`}</p>);
+                        return (<p>{`group ${groupId+1}: ${nParticipants}`}&emsp;</p>);
                     })
                 }
             </div>
             {/* call for participants */}
-            <a href={`/call-for-participants?groupingId=${grouping.id}`}>Call for Participants</a>
+            <button>
+                <a 
+                    href={`/call-for-participants?groupingId=${grouping.id}`}
+                    target="_blank"
+                >
+                Call for Participants
+                </a>
+            </button>
         </div>
     );
 }; 

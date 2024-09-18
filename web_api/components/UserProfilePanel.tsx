@@ -17,7 +17,7 @@ export const UserProfilePanel :React.FC<UserProfilePanelProps> = (props :UserPro
             {
                 props.organizer.name === undefined
                 ? <p>{"Welcome! My friend!"}</p>
-                : <p>{`Welcome! ${props.organizer.name}`}</p>
+                : <p>Welcome!&emsp;{props.organizer.name}</p>
             }
             {/* user photo */}
             {
