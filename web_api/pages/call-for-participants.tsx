@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
+import { useQRCode } from 'next-qrcode';
 import "../app/globals.css"
 
 interface CallForParticipantsPageProps {
@@ -25,11 +26,15 @@ export default function CallForParticipantsPage ({protocol, host} :CallForPartic
     const { query } = router; 
     let groupingId = query.groupingId! as string; 
     
-
     let participatingUrl = `${protocol}://${host}/participate/${groupingId}`;
+    
+    const { Canvas } = useQRCode(); 
+
     return (
         <div>
-            <p>{participatingUrl}</p>
+            <Canvas
+              text={participatingUrl}
+            />
         </div>
     ); 
 }
