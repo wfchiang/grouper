@@ -29,7 +29,7 @@ export const GoogleSignInButton :React.FC<GoogleSignInButtonProps> = ({setPerson
                 : undefined
             ); 
             if (!validateAgaintOrganizer || organizer !== undefined) {
-                let newPerson = {
+                const newPerson = {
                     name: (user.displayName == null ? undefined : user.displayName), 
                     email: (user.email == null ? undefined : user.email), 
                     photoURL: (user.photoURL == null ? undefined : user.photoURL) 

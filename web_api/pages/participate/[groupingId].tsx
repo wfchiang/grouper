@@ -17,7 +17,7 @@ export default function ParticipateGroupingPage () {
       // add the participant 
       addParticipant({...person, groupingId} as Participant)
       .then((assignedGroupId :number) => {
-        let updatedParticipant = {...person, groupingId, assignedGroupId}; 
+        const updatedParticipant = {...person, groupingId, assignedGroupId}; 
         console.log(`setting participant... ${JSON.stringify(updatedParticipant)}`); 
         setParticipant(updatedParticipant);
       }); 

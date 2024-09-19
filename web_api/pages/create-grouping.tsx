@@ -27,7 +27,7 @@ export default function CreateGrouping () {
             throw new Error("Cannot create a grouping with an empty name"); 
         }
         
-        let intInputNumGroups = parseInt(inputNumGroups); 
+        const intInputNumGroups = parseInt(inputNumGroups); 
         if (intInputNumGroups <= 0) {
             throw new Error(`Invalid number of groups: ${inputNumGroups}`); 
         }

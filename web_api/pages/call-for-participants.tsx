@@ -14,7 +14,7 @@ export default function CallForParticipantsPage () {
         const host = window.location.host!; 
         const params = new URLSearchParams(window.location.search!);
         const groupingId = params.get("groupingId"); 
-        let relUrl = `/participate/${groupingId}`; 
+        const relUrl = `/participate/${groupingId}`; 
         setRelativeParticipatingUrl(relUrl); 
         setParticipatingUrl(`${protocol}://${host}${relUrl}`); 
       }
