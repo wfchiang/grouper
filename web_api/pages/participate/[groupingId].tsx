@@ -45,7 +45,7 @@ export default function ParticipateGroupingPage () {
                   type="text" 
                   value={manualInputEmail} 
                   onChange={(e) => {setManualInputEmail(e.target.value)}}/>
-                <button onClick={participateByManualInputEmail}>Sign in with Email</button>
+                <button className="default-button" onClick={participateByManualInputEmail}>Sign in with Email</button>
               </div>
               <p>---- or ----</p>
               <GoogleSignInButton setPerson={participateGrouping} validateAgaintOrganizer={false}/>

@@ -8,8 +8,8 @@ interface OrganizerActionsPanelProps {
 export const OrganizerActionsPanel :React.FC<OrganizerActionsPanelProps> = ({organizer} :OrganizerActionsPanelProps) => {
     // Render the list of Groupings
     return (
-        <div>
-            <button>
+        <div className="organizer-actions-panel">
+            <button className="default-button">
                 <a href={`/create-grouping?organizerEmail=${organizer.email}`}>New Grouping</a>
             </button>
         </div>

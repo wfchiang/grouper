@@ -39,7 +39,7 @@ export const GroupingDisplayBox :React.FC<GroupingDisplayBoxProps> = ({grouping}
     // render 
     return (
         <div className="grouping-display-box">
-            <div style={{display: "flex"}}>
+            <div className="grouping-display-box-info">
                 {/* name */}
                 {
                     grouping.name === undefined
@@ -53,10 +53,10 @@ export const GroupingDisplayBox :React.FC<GroupingDisplayBoxProps> = ({grouping}
                     : <p>{grouping.description}</p>
                 }
             </div>
-            {/* number of groups */}
-            <h2>{`${grouping.numGroups} groups`}</h2>
-            {/* participant assignment */}
-            <div style={{display: "flex"}}>
+            <div className="group-id-display-box-assignment">
+                {/* number of groups */}
+                <h2>{`${grouping.numGroups} groups`}</h2>
+                {/* participant assignment */}
                 {
                     Array.from({length: grouping.numGroups}, (_, groupId) => {
                         const nParticipants = (
@@ -68,9 +68,9 @@ export const GroupingDisplayBox :React.FC<GroupingDisplayBoxProps> = ({grouping}
                     })
                 }
             </div>
-            {/* call for participants */}
-            <div> 
-                <button>
+            <div className="group-id-display-box-actions"> 
+                {/* call for participants */}
+                <button className="default-button">
                     <a 
                         href={`/call-for-participants?groupingId=${grouping.id}`}
                         target="_blank"
@@ -78,7 +78,7 @@ export const GroupingDisplayBox :React.FC<GroupingDisplayBoxProps> = ({grouping}
                     Call for Participants
                     </a>
                 </button>
-                <button onClick={deleteGrouping}>Delete</button>
+                <button className="default-button" onClick={deleteGrouping}>Delete</button>
             </div>
         </div>
     );

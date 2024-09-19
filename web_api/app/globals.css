@@ -32,6 +32,16 @@ input {
   border-width: 3px;
 }
 
+/* generic styles */
+.default-button {
+  padding: 5px;
+  border-color: rgb(224, 220, 220);
+  border-right-width: 5px;
+  border-bottom-width: 5px;
+  background-color: rgb(200, 230, 240);
+  border-radius: 5px;
+}
+
 /* AuthPanel */
 .auth-panel {
   margin :3em;
@@ -48,16 +58,26 @@ input {
   font-size: larger;
 }
 
+/* OrganizerActionsPanel */ 
+.organizer-actions-panel {
+  margin: 3em;
+  display: flex;
+}
+
+.organizer-actions-panel > button {
+  margin-right: 1em;
+}
+
 /* UserProfilePanel */ 
 .user-profile-panel {
-  margin: 1em;
+  margin: 3em;
   display: flex;
   align-items: center;
   justify-content: flex-end;
 }
 
 .user-profile-panel > * {
-  margin: 5px;
+  margin: 1em;
 }
 
 /* GroupIdDisplayBox */
@@ -73,37 +93,41 @@ input {
 }
 
 /* GroupingList */
-.grouping-list > .grouping-display-box {
-  margin: 1em; 
+.grouping-list {
+  margin: 3em;
 }
 
 /* GroupingDisplayBox */
 .grouping-display-box {
   border-color: gray;
   border-width: 3px;
+  border-radius: 5pm;
 }
 
-.grouping-display-box > h2 {
-  font-size: large;
-  margin-right: 1em;
-}
-
-.grouping-display-box > * > button {
-  margin-right: 1em;
-  padding: 5px;
-  background-color: lightgray;
-  border-width: medium;
-  border-color: lightblue;
-  border-radius: 5px;
-}
-
-.grouping-display-box > * > h2 {
-  font-size: large;
-  margin-right: 1em;
-}
-
-.grouping-display-box > * {
+.grouping-display-box > div {
   margin: 1em;
+}
+
+.grouping-display-box > div > h2 {
+  font-size: large;
+  margin-right: 1em;
+}
+
+.grouping-display-box-info {
+  display: flex;
+}
+
+.grouping-display-box-assignment {
+  display: flex;
+  flex-direction: column;
+}
+
+.group-id-display-box-actions {
+  display: flex;
+}
+
+.group-id-display-box-actions > button {
+  margin-right: 1em;
 }
 
 /* Call-for-participants */ 
@@ -115,7 +139,7 @@ input {
 }
 
 .call-for-participants > h2 {
-  font-size: large;
+  font-size: x-large;
 }
 
 .call-for-participants > a {
@@ -130,12 +154,4 @@ input {
 /* Participate grouping */ 
 .manual-email-input > * {
   margin: 4px;
-}
-
-.manual-email-input > button {
-  border-radius: 4px;
-  background-color: lightgray;
-  border-color: black;
-  border-width: medium;
-  padding: 3px;
 }

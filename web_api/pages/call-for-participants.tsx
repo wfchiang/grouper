@@ -31,6 +31,10 @@ export default function CallForParticipantsPage () {
         <h2>Join Grouping with QR Code</h2>
         <Canvas
           text={participatingUrl}
+          options={{
+            margin: 1, 
+            width: 400
+          }}
         />
         <a href={relatedParticipatingUrl}>{participatingUrl}</a>
       </div>
