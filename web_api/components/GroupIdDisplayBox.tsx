@@ -13,7 +13,8 @@ export const GroupIdDisplayBox :React.FC<GroupIdDisplayBoxProps> = ({groupdId} :
             <p>Group assignment in progress...</p>
         </div>
         : <div className="group-id-display-box">
-            <h2>{`Your group: ${groupdId+1}`}</h2>
+            <h2>{`Your group: `}</h2>
+            <h1>{`${groupdId+1}`}</h1>
         </div>
     );
 }; 

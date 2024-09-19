@@ -80,18 +80,6 @@ input {
   margin: 1em;
 }
 
-/* GroupIdDisplayBox */
-.group-id-display-box {
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.group-id-display-box > h2 {
-  font-size: large;
-}
-
 /* GroupingList */
 .grouping-list {
   margin: 3em;
@@ -122,12 +110,26 @@ input {
   flex-direction: column;
 }
 
-.group-id-display-box-actions {
+/* GroupIdDisplayBox */
+.group-id-display-box {
+  margin: 3em; 
   display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: center;
 }
 
-.group-id-display-box-actions > button {
-  margin-right: 1em;
+.group-id-display-box > h2 {
+  font-size: x-large;
+}
+
+.group-id-display-box > h1 {
+  margin: 1em;
+  font-size: xx-large;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
+  font-style: italic;
+  font-weight: 300;
+  color: red;
 }
 
 /* Call-for-participants */ 
