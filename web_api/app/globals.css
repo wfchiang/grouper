@@ -26,6 +26,12 @@ body {
   }
 }
 
+/* element default style */
+input {
+  border-color: gray;
+  border-width: 3px;
+}
+
 /* AuthPanel */
 .auth-panel {
   margin :3em;
@@ -82,7 +88,8 @@ body {
   margin-right: 1em;
 }
 
-.grouping-display-box > button {
+.grouping-display-box > * > button {
+  margin-right: 1em;
   padding: 5px;
   background-color: lightgray;
   border-width: medium;
@@ -118,4 +125,17 @@ body {
 
 .call-for-participants > * {
   margin: 2em;
+}
+
+/* Participate grouping */ 
+.manual-email-input > * {
+  margin: 4px;
+}
+
+.manual-email-input > button {
+  border-radius: 4px;
+  background-color: lightgray;
+  border-color: black;
+  border-width: medium;
+  padding: 3px;
 }

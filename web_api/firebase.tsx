@@ -1,7 +1,7 @@
 // firebase.ts
 import { v4 as uuidv4 } from 'uuid';
 import { initializeApp } from "firebase/app";
-import { Timestamp, collection, query, getCountFromServer, where, getFirestore, getDocs, addDoc } from "firebase/firestore";
+import { Timestamp, collection, query, getCountFromServer, where, getFirestore, getDocs, addDoc, deleteDoc } from "firebase/firestore";
 
 /* 
 Some constants 
@@ -223,4 +223,35 @@ export async function addParticipant (participant :Participant) :Promise<number>
   else {
     return existingParticipant.assignedGroupId!; 
   }
+}
+
+/*
+Deletion functions 
+*/ 
+export async function deleteGroupingById (id :string) {
+  const querySnapshot = await getDocs(query(
+    collection(db, COLLECTION_GROUPING), 
+    where("id", "==", id)
+  ));
+  querySnapshot.forEach((doc) => {
+    deleteDoc(doc.ref)
+    .then(() => {})
+    .catch((error) => {
+      console.log("Failed to delete grouping: ", error)
+    })
+  });
+}
+
+export async function deleteParticipantsByGroupingId (groupingId :string) {
+  const querySnapshot = await getDocs(query(
+    collection(db, COLLECTION_PARTICIPANT), 
+    where("groupingId", "==", groupingId), 
+  ));
+  querySnapshot.forEach((doc) => {
+    deleteDoc(doc.ref)
+    .then(() => {})
+    .catch((error) => {
+      console.log("Failed to delete participant: ", error)
+    });
+  }); 
 }

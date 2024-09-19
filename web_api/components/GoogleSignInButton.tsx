@@ -8,9 +8,10 @@ import { Person, app as firebaseApp, getOrganizer } from '../firebase';
 interface GoogleSignInButtonProps {
     setPerson :(person: Person) => void; 
     validateAgaintOrganizer :boolean;
+    sessionStorageKey? :string; 
 }
 
-export const GoogleSignInButton :React.FC<GoogleSignInButtonProps> = ({setPerson, validateAgaintOrganizer} :GoogleSignInButtonProps) => {
+export const GoogleSignInButton :React.FC<GoogleSignInButtonProps> = ({setPerson, validateAgaintOrganizer, sessionStorageKey} :GoogleSignInButtonProps) => {
     const signInWithGoogle = async () => {
         try {
             // Acquire the user credential and save it 
@@ -28,11 +29,17 @@ export const GoogleSignInButton :React.FC<GoogleSignInButtonProps> = ({setPerson
                 : undefined
             ); 
             if (!validateAgaintOrganizer || organizer !== undefined) {
-                setPerson({
+                let newPerson = {
                     name: (user.displayName == null ? undefined : user.displayName), 
                     email: (user.email == null ? undefined : user.email), 
                     photoURL: (user.photoURL == null ? undefined : user.photoURL) 
-                }); 
+                } as Person; 
+
+                setPerson(newPerson); 
+
+                if (typeof sessionStorageKey === "string") {
+                    sessionStorage.setItem(sessionStorageKey, JSON.stringify(newPerson)); 
+                }
             }
             
         } catch (error) {

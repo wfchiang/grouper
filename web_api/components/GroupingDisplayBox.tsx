@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Grouping, Participant, getParticipantByGroupingId } from "@/firebase"
+import { Grouping, Participant, deleteGroupingById, deleteParticipantsByGroupingId, getParticipantByGroupingId } from "@/firebase"
 // import { CallForParticipants } from "./CallForParticipants";
 import "../app/globals.css"
 
@@ -26,6 +26,15 @@ export const GroupingDisplayBox :React.FC<GroupingDisplayBoxProps> = ({grouping}
         }
         setParticipantAssignment(newParticipantAssignment); 
     });
+
+    // delete the grouping 
+    const deleteGrouping = () => {
+        deleteParticipantsByGroupingId(grouping.id!)
+        .then(() => {
+            deleteGroupingById(grouping.id!)
+            .then(() => {});
+        });
+    }; 
 
     // render 
     return (
@@ -60,14 +69,17 @@ export const GroupingDisplayBox :React.FC<GroupingDisplayBoxProps> = ({grouping}
                 }
             </div>
             {/* call for participants */}
-            <button>
-                <a 
-                    href={`/call-for-participants?groupingId=${grouping.id}`}
-                    target="_blank"
-                >
-                Call for Participants
-                </a>
-            </button>
+            <div> 
+                <button>
+                    <a 
+                        href={`/call-for-participants?groupingId=${grouping.id}`}
+                        target="_blank"
+                    >
+                    Call for Participants
+                    </a>
+                </button>
+                <button onClick={deleteGrouping}>Delete</button>
+            </div>
         </div>
     );
 }; 
