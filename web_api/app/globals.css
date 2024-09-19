@@ -130,6 +130,8 @@ input {
   font-style: italic;
   font-weight: 300;
   color: red;
+  background-color: rgb(230, 227, 227);
+  padding: 5px; 
 }
 
 /* Call-for-participants */ 
