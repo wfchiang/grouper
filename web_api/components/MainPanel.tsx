@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Organizer } from '@/firebase';
 import { AuthPanel } from './AuthPanel';
 import { UserProfilePanel } from './UserProfilePanel';
@@ -8,11 +8,15 @@ import { GroupingList } from './GroupingList';
 import { OrganizerActionsPanel } from './OrganizerActionsPanel';
 
 export const MainPanel :React.FC = () => {
-    const [organizer, setOrganizer] = useState<Organizer>(
-        sessionStorage.getItem("grouper-organizer") === null
-        ? {} 
-        : JSON.parse(sessionStorage.getItem("grouper-organizer") as string) as Organizer
-    ); 
+    const [organizer, setOrganizer] = useState<Organizer>({}); 
+
+    useEffect(() => {
+        if (window !== undefined) {
+            if (typeof window.sessionStorage.getItem("grouper-organizer") === "string") {
+                setOrganizer(JSON.parse(window.sessionStorage.getItem("grouper-organizer") as string) as Organizer); 
+            }
+        }
+    }, []); 
 
     return (
         organizer.email === undefined
